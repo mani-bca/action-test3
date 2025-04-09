@@ -1,0 +1,22 @@
+name: My First Workflow
+
+on:
+  pull_request_review:
+    types: [ "submitted" ]
+
+jobs:
+  first_job:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Welcome message for joiner
+      run: echo "First GitHub hello action executed"
+
+    - name: Create artifact directory
+      run: mkdir -p artifacts
+
+    - name: Save artifact
+      run: echo "This is a sample artifact" > artifacts/sample.txt
